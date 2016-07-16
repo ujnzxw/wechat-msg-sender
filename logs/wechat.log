@@ -1,0 +1,2 @@
+[INFO     07-16 12:16:38] [] [wechat.py:40:get_token] The link is https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=wx89bc331bff1b27fe&corpsecret=2uBB853V9sTgNVr1mq-tUwccV_dJDqC_kqgU-Pu_Nycr0WH9lm26QyZsJO1Y5T7e
+[INFO     07-16 12:16:44] [] [wechat.py:101:send_msg] {u'invaliduser': u'all user invalid', u'errcode': 0, u'errmsg': u'ok'}

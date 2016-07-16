@@ -1,0 +1,4 @@
+#!/usr/bin/python
+
+__file__ = './wechat.py'
+exec(compile(open(__file__).read(), __file__, 'exec'))
