@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 #======================================================
-
 # Title             : wechat.py
 # Description       : wechat task
 # Author            : ujnzxw
@@ -12,32 +11,42 @@
 
 # -*- coding: utf-8 -*-
 import urllib,urllib2,json
-import sys
-reload(sys)
+import sys;reload(sys)
+
+from optparse import OptionParser
 from lib.csflog import csflog
+from lib.csfcfg import csfcfg
 sys.setdefaultencoding( "utf-8" )
 
 class WeChat(object):
     __token_id = ''
     # Init attribute
-    def __init__(self,url):
-        csflog.init_logger("./logs/wechat.log")
-        self.__url = url.rstrip('/')
-        self.__corpid = 'wx89bc331bff1b27fe'
-        self.__secret = '2uBB853V9sTgNVr1mq-tUwccV_dJDqC_kqgU-Pu_Nycr0WH9lm26QyZsJO1Y5T7e'
+    def __init__(self, toparty, touser, msg):
+        csfcfg._init('../cfg-private/cfg.ini')
+        csflog.init_logger(csfcfg._get('logs', 'logfile'))
+
+        self.__url    = csfcfg._get('server', 'url').rstrip('/')
+        self.__corpid = csfcfg._get('server', 'corpid')
+        self.__secret = csfcfg._get('server', 'secret')
+        self.__toparty= toparty
+        self.__touser = touser
+        self.__msg    = msg
 
     """
-    @Summary   : get token id by using self.__url, self.__corpid, self.__secret
+    @Summary   : get token id by using
+               : self.__url, self.__corpid, self.__secret
     @Parameter : url_prefix='/'
     @Attention : the token will fill into self.__token_id
     """
     def get_token(self, url_prefix='/'):
 
-        params = {'corpid':self.__corpid, 'corpsecret':self.__secret}
+        params = {
+                    'corpid'    : self.__corpid,
+                    'corpsecret': self.__secret
+                 }
         data = urllib.urlencode(params)
-
         url = self.__url + url_prefix + 'gettoken?'
-        csflog.info("The link is %s" %(url + data))
+
         try:
             response = urllib2.Request(url + data)
         except KeyError:
@@ -78,28 +87,34 @@ class WeChat(object):
 
     """
     @Summary   : message sending method
-    @Parameter : touser - the user you want to send to
-               : message- the message contents
+    @Parameter : null
     @Attention : null
     """
-    def send_msg(self,touser,message):
+    def send_msg(self):
 
         self.get_token()
 
+        # Use default toparty if toparty is null
+        if (self.__toparty == None):
+            self.__toparty = csfcfg._get('user', 'toparty')
+
+        csflog.info("touser - %s" % self.__touser)
+        csflog.info("toparty - %s" % self.__toparty)
+
         data = json.dumps(
                 {
-                     'touser' : touser,
-                     'toparty': "1",
-                     'msgtype': "text",
-                     'agentid': "1",
-                     'text'   : { 'content' : message },
-                     'safe'   : "0"
+                     'touser' : self.__touser,
+                     'toparty': self.__toparty,
+                     'msgtype': csfcfg._get('user', 'msgtype'),
+                     'agentid': csfcfg._get('user', 'agentid'),
+                     'text'   : { 'content' : self.__msg },
+                     'safe'   : csfcfg._get('user', 'safe')
                 },
-                ensure_ascii=False)
+                ensure_ascii = False)
 
         response = self.post_data(data)
         csflog.info(response)
 
 if __name__ == '__main__':
-        we_chat = WeChat('https://qyapi.weixin.qq.com/cgi-bin')
-        we_chat.send_msg(sys.argv[1],sys.argv[2])
+        wechat = WeChat("ujnzxw", "Hello wechat!")
+        wechat.send_msg()

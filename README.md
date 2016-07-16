@@ -3,9 +3,15 @@ WeChat Enterprise account API
 
 This is a WeChat Enterprise Account message sending Tool.
 
+Installation
+-----------
+TODO
+
 TO-DO List
 ----------
-1. Add parameter check function
-2. Add help func
-3. Add config file
-4. Add cfg file parser
+
+License
+-------
+Copyright (c) 2014-2016 ujnzxw <ujnzxw@gmail.com>
+
+Distributed under the MIT license. See the LICENSE file for more details.
