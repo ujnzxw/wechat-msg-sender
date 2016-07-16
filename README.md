@@ -1,7 +1,7 @@
 WeChat Enterprise account API
 =====================================
 
-This is a WeChat Enterprise Account message sending Tool.
+This is a WeChat Enterprise Account CLI message sending Tool.
 
 Installation
 -----------
