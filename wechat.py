@@ -22,7 +22,7 @@ class WeChat(object):
     __token_id = ''
     # Init attribute
     def __init__(self, toparty, touser, msg):
-        csfcfg._init('../cfg-private/cfg.ini')
+        csfcfg._init('./cfg.ini')
         csflog.init_logger(csfcfg._get('logs', 'logfile'))
 
         self.__url    = csfcfg._get('server', 'url').rstrip('/')

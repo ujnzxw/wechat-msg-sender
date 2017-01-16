@@ -15,7 +15,7 @@ To **install** or **update** sender you can run this command:
 
 ##### Have a test
 
-After you install or cloned this project, please run `sender -h`
+After you install or cloned this project, please run `wechat-msg-sender -h`
 
 Usage: sender --touser=<to user> --message=<sending message> [options]
 
