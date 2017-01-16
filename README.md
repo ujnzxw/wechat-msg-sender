@@ -47,6 +47,7 @@ Fill your WeChat Enterprise Account infomation into ${INSTALL_DIR}/.wechat-msg-s
 
 After you install or cloned this project, please run `wechat-msg-sender -h`
 
+```
 Usage: sender --touser=<to user> --message=<sending message> [options]
 
 Options:
@@ -57,6 +58,7 @@ Options:
                         message you want to send
   -p TOPARTY, --toparty=TOPARTY
                         sending party. Use the one in cfg.ini as default
+```
 
 
 
