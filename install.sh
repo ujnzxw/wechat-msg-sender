@@ -51,9 +51,9 @@ install_from_git()
             exit 1
         }
         chmod -R 755 ${INSTALL_DIR}/lib  2>/dev/null
-        chmod -R 755 ${INSTALL_DIR}/plugins 2>/dev/null
-        chmod 755 ${INSTALL_DIR}/u 2>/dev/null
-        sudo ln -sf ${INSTALL_DIR}/u /usr/local/bin/u
+        chmod -R 755 ${INSTALL_DIR}/wechat.py 2>/dev/null
+        chmod 755 ${INSTALL_DIR}/sender 2>/dev/null
+        sudo ln -sf ${INSTALL_DIR}/sender /usr/local/bin/wechat-msg-sender
     fi
 }
 
