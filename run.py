@@ -15,6 +15,15 @@ REQUIRED_OPTIONS = {
                     ('touser', 'touser'),
                     ('message', 'message')
                    }
+"""
+@Summary   : get the required parameters and run wechat.send_msg()
+
+@Parameter : toparty - the party you want to send
+             touser  - the user in the party you want to send
+             message - the message you want to send
+
+@Attention : null
+"""
 def run():
     usage = 'usage: %prog --touser=<to user> --message=<sending message> [options]'
     parser = OptionParser(usage=usage)
@@ -22,7 +31,7 @@ def run():
                       help='message send to')
     parser.add_option('--message', '-m', dest='message',
                       help='message you want to send')
-    parser.add_option('--toparty', dest='toparty',
+    parser.add_option('--toparty', '-p', dest='toparty',
                       help='sending party. Use the one in cfg.ini as default')
     (options, args) = parser.parse_args()
     for option_name, key in REQUIRED_OPTIONS:

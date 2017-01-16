@@ -116,5 +116,5 @@ class WeChat(object):
         csflog.info(response)
 
 if __name__ == '__main__':
-        wechat = WeChat("ujnzxw", "Hello wechat!")
+        wechat = WeChat(1, "ujnzxw", "Hello wechat!")
         wechat.send_msg()
