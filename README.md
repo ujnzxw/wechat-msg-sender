@@ -5,15 +5,45 @@ This is a WeChat Enterprise Account CLI message sending Tool.
 
 Usage
 -----
-##### Create a WeChat Enterprise Account for your team from [微信公众平台](https://mp.weixin.qq.com/)
+### Create a WeChat Enterprise Account
 
-##### Install WeChat message sender
+1. Create a WeChat Enterprise Account for your team from [微信公众平台](https://mp.weixin.qq.com/)
+2. Get your corpid and secret
+3. create a party and add a main user id.
+
+
+### Install WeChat message sender
 
 To **install** or **update** sender you can run this command:
 
 `INSTALL_DIR=$HOME/.wechat-msg-sender sh <(curl -fsSL https://raw.githubusercontent.com/ujnzxw/wechat-msg-sender/master/install.sh)`
 
-##### Have a test
+###  Configuration File
+
+Fill your WeChat Enterprise Account infomation into ${INSTALL_DIR}/.wechat-msg-sender/cfg.ini
+
+  For Example:
+  ```
+  [server]
+
+  url     = https://qyapi.weixin.qq.com/cgi-bin
+  corpid  = YOUR_CORPID
+  secret  = YOUR_SECRET
+
+  [user]
+
+  touser  = YOUR_USER_ID
+  toparty = 1
+  msgtype = text
+  agentid = 1
+  safe    = 0
+
+  [logs]
+
+  logfile = ./logs/wechat.log
+  ```
+
+### Have a test
 
 After you install or cloned this project, please run `wechat-msg-sender -h`
 
