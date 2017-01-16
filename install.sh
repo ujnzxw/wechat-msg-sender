@@ -73,12 +73,12 @@ fi
 
 [ -z "${INSTALL_DIR}" ] && INSTALL_DIR="/usr/local/${PKG}"
 
-if [ -f "${INSTALL_DIR}/u" ]; then
+if [ -f "${INSTALL_DIR}/sender" ]; then
     install_echo ""
     install_echo "Done!"
 else
     install_echo >&2 ""
-    install_echo >&2 "Something went wrong. ${INSTALL_DIR}/u not found"
+    install_echo >&2 "Something went wrong. ${INSTALL_DIR}/sender not found"
     install_echo >&2 ""
     exit 1
 fi
