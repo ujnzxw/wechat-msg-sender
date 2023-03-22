@@ -1,3 +1,0 @@
-[WARNING  07-16 15:37:51] [] [csflog.py:114:init_logger] Logger %s already has file handler
-Ignore this one: %s
-Reserve old one: %s

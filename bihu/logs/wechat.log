@@ -1,0 +1,5 @@
+[INFO     03-29 14:02:28] [] [xzcfg.py:28:_init] Configure file is /root/bihu24h/config.ini
+[WARNING  03-29 14:02:28] [] [xzlog.py:114:init_logger] Logger %s already has file handler
+Ignore this one: %s
+Reserve old one: %s
+[INFO     03-29 14:02:28] [] [HttpProxyMiddleware.py:17:<module>] zxxxxxxxxxxxxxx

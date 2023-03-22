@@ -1,0 +1,3 @@
+[WARNING  03-29 14:02:28] [] [xzlog.py:114:init_logger] Logger %s already has file handler
+Ignore this one: %s
+Reserve old one: %s

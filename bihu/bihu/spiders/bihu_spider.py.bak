@@ -1,0 +1,85 @@
+# -*- coding: utf-8 -*-
+import sys
+sys.path.append('../')
+print sys.path
+import scrapy
+import requests
+from bihu.items import BihuItem
+from lib.xzlog import xzlog
+from lib.xzcfg import xzcfg
+
+
+class ArticleSpider(scrapy.Spider):
+    name = 'article'
+    allowed_domains = ["be02.bihu.com"]
+    def __init__(self, *args, **kwargs):
+        super(ArticleSpider, self).__init__(*args, **kwargs)
+
+        self.start_number = xzcfg._get('spider', 'start_number')
+        self.max_number   = xzcfg._get('spider', 'max_number')
+        self.max_null_number = xzcfg._get('spider', 'max_null_number')
+
+        self.null_number = 0
+
+        #self.start_urls = ['https://bihu.com']
+        #POST /bihube-pc/api/content/show/getArticle HTTP/1.1
+        self.headers = {
+            'Accept': '*/*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7',
+            'Connection': 'keep-alive',
+            #'Content-Length': '28',
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            #'Host': 'be02.bihu.com',
+            'Origin': 'https://bihu.com',
+            #'Referer': 'https://bihu.com/article/1',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
+        }
+
+    #def parse(self, response):
+    #    article_url = 'https://bihu.com/article'
+    #    article_xpath = '/html/body/div[1]/div/div[1]/div/div/div[2]/div/div'
+
+    #    #article_num = response.url.split("/")[-2]
+    #    #while self.null_number < self.max_null_number:
+    #    #xzlog.info(response.body)
+
+    #    for sel in response.xpath( article_xpath ):
+    #        all_class = sel.xpath('//p//@class').extract()
+    #        if 'follow-null' in all_class:
+    #            # the article is null
+    #            self.null_number += self.null_number
+    #            logstr = 'zxw'+ str(self.null_number)
+    #            xzlog.info(logstr)
+    #            continue
+    #        else:
+    #            self.null_number = 0
+    #            item = BihuItem()
+    #            item['url']      = start_number
+    #            item['title']    = sel.xpath('./div[1]/h3/text()').extract_first()
+    #            item['author']   = sel.xpath('./div[2]/div[2]/p[1]/text()').extract_first()
+    #            item['date']     = sel.xpath('./div[2]/div[2]/p[2]/text()').extract_first()
+    #            item['content']  = sel.xpath('./div[3]/*').extract_first()
+    #            item['revenue']  = sel.xpath('./div[5]/div/div[1]/button/p/text()').extract_first()
+    #            item['likes']    = sel.xpath('./div[5]/div/div[2]/button/p/text()').extract_first()
+    #            item['dislikes'] = sel.xpath('./div[5]/div/div[3]/button/p/text()').extract_first()
+    #            xzlog.info('zxw'+item['title'])
+    #            yield item
+
+    #    article_url = article_url + '/' + self.start_number
+    #    scrapy.Request(article_url, headers=self.headers, method='POST', callback=self.parse)
+
+    def start_requests(self):
+        formdata = {
+            'userId': '',
+            'accessToken': '',
+            'artId': '124019'
+        }
+        url = 'https://be02.bihu.com/bihube-pc/api/content/show/getArticle'
+        yield scrapy.FormRequest(url, callback=self.parse_item, formdata=formdata, headers=self.headers, method='POST')
+
+
+    def parse_item(self, response):
+        raw_data = response.body
+
+

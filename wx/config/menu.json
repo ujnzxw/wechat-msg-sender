@@ -1,0 +1,25 @@
+{
+    "menu" : {
+       "button":[
+        {
+            "name":"排行榜",
+            "sub_button":[
+            {
+                "type":"view",
+                "name":"点赞排行榜",
+                "url":"http://www.bihu365.net/rank/ups-number"
+            },
+            {
+                "type":"view",
+                "name":"发文排行榜",
+                "url":"http://www.bihu365.net/rank/article-number"
+            }]
+        },
+        {
+            "type":"view",
+            "name":"热搜榜",
+            "url":"http://www.bihu365.net/rank/hot-search"
+
+        }]
+    }
+}
